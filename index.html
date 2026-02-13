@@ -418,6 +418,47 @@
             }
         }
 
+        /* Community Section */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .community-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .community-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .community-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .community-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .community-description {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
         /* Contact Section */
         .contact-section {
             background: var(--bg-card);
@@ -881,6 +922,40 @@
         </div>
     </section>
 
+    <!-- WordPress Community Section -->
+    <section class="section">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Community Involvement</h2>
+            <p class="section-subtitle">Active contributor to the WordPress ecosystem through events, knowledge sharing, and community engagement.</p>
+        </div>
+
+        <div class="community-grid">
+            <div class="community-card fade-in">
+                <div class="community-icon">🎤</div>
+                <h3 class="community-title">WordCamp Participant</h3>
+                <p class="community-description">
+                    Regular attendee and active participant at WordCamp events, staying connected with the latest WordPress trends, networking with fellow developers, and contributing to community discussions.
+                </p>
+            </div>
+
+            <div class="community-card fade-in">
+                <div class="community-icon">💬</div>
+                <h3 class="community-title">WordPress Communities</h3>
+                <p class="community-description">
+                    Actively engaged in WordPress communities, sharing knowledge, helping fellow developers solve challenges, and staying updated with best practices and emerging technologies in the ecosystem.
+                </p>
+            </div>
+
+            <div class="community-card fade-in">
+                <div class="community-icon">🤝</div>
+                <h3 class="community-title">Knowledge Sharing</h3>
+                <p class="community-description">
+                    Committed to giving back to the community through code contributions, WordPress.org plugin development, and participating in developer forums and meetups.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact-section fade-in">
         <h2 class="contact-title">Let's Build Something Great</h2>
@@ -889,7 +964,7 @@
         </p>
         <div class="contact-links">
             <a href="mailto:madhvikoshti09@gmail.com" class="contact-btn">
-                📧 Gmail
+                📧 madhvikoshti09@gmail.com
             </a>
             <a href="https://github.com/Kmadhvi" class="contact-btn secondary" target="_blank">
                 💻 GitHub
