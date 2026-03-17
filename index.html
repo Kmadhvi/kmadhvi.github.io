@@ -1,1017 +1,1159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madhvi Koshti Desai - Senior WordPress Developer | Custom Plugin & Theme Development</title>
-    <meta name="description" content="Experienced WordPress developer specializing in custom plugins, WooCommerce, BuddyBoss, and scalable enterprise solutions. 5+ years delivering exceptional results.">
-    <meta name="keywords" content="WordPress Developer, Custom Plugin Development, WooCommerce Expert, BuddyBoss, WordPress Multisite, Freelance WordPress Developer">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0a0a;
-            --bg-card: #151515;
-            --accent-gold: #d4af37;
-            --accent-blue: #4a9eff;
-            --text-light: #f5f5f5;
-            --text-muted: #a0a0a0;
-            --border-subtle: #2a2a2a;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Animated background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(74, 158, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .hero-label {
-            font-size: 0.875rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--accent-gold);
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-light) 0%, var(--accent-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-        }
-
-        .hero-description {
-            font-size: clamp(1.125rem, 2vw, 1.5rem);
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            max-width: 600px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-        }
-
-        .stat {
-            border-left: 2px solid var(--accent-gold);
-            padding-left: 1rem;
-        }
-
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-gold);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            max-width: 600px;
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-gold);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(74, 158, 255, 0.1);
-            color: var(--accent-blue);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .project-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--text-light);
-        }
-
-        .project-description {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tech-badge {
-            padding: 0.35rem 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-subtle);
-            font-size: 0.75rem;
-            border-radius: 6px;
-            color: var(--text-muted);
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--accent-gold);
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 1rem;
-            transition: gap 0.3s ease;
-        }
-
-        .project-link:hover {
-            gap: 1rem;
-        }
-
-        /* Skills Section */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-4px);
-        }
-
-        .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .skill-category-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            padding: 0.5rem 0;
-            color: var(--text-muted);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .skill-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Professional Journey Timeline */
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--accent-gold) 0%, var(--accent-blue) 100%);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 60px;
-            margin-bottom: 3rem;
-        }
-
-        .timeline-marker {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .timeline-dot {
-            width: 42px;
-            height: 42px;
-            background: var(--bg-card);
-            border: 3px solid var(--accent-gold);
-            border-radius: 50%;
-            position: relative;
-        }
-
-        .timeline-dot::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 12px;
-            height: 12px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-        }
-
-        .timeline-content {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            border-color: var(--accent-gold);
-            transform: translateX(8px);
-        }
-
-        .timeline-period {
-            color: var(--accent-blue);
-            font-size: 0.875rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-company {
-            color: var(--text-muted);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-description {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-            .timeline::before {
-                left: 15px;
-            }
-
-            .timeline-item {
-                padding-left: 50px;
-            }
-
-            .timeline-dot {
-                width: 32px;
-                height: 32px;
-            }
-
-            .timeline-content {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Community Section */
-        .community-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .community-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .community-card:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
-        }
-
-        .community-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .community-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-
-        .community-description {
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: var(--bg-card);
-            border-radius: 24px;
-            padding: 4rem 2rem;
-            text-align: center;
-            border: 1px solid var(--border-subtle);
-            margin: 5rem 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .contact-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            margin-bottom: 1rem;
-        }
-
-        .contact-description {
-            color: var(--text-muted);
-            font-size: 1.125rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-btn {
-            padding: 1rem 2rem;
-            background: var(--accent-gold);
-            color: var(--bg-dark);
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .contact-btn:hover {
-            background: var(--accent-blue);
-            color: var(--text-light);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(74, 158, 255, 0.3);
-        }
-
-        .contact-btn.secondary {
-            background: transparent;
-            color: var(--text-light);
-            border: 2px solid var(--border-subtle);
-        }
-
-        .contact-btn.secondary:hover {
-            border-color: var(--accent-gold);
-            background: transparent;
-            box-shadow: none;
-        }
-
-        /* Footer */
-        footer {
-            padding: 3rem 2rem;
-            text-align: center;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                min-height: 80vh;
-            }
-
-            .section {
-                padding: 3rem 1rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-section {
-                margin: 3rem 1rem;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madhvi Koshti Desai — Senior WordPress Developer</title>
+<meta name="description" content="Senior WordPress Developer specializing in LearnDash LMS, WooCommerce, BuddyBoss, custom plugins and enterprise solutions. 5+ years experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:          #FFFFFF;
+  --bg-soft:     #F8FAFC;
+  --bg-muted:    #F1F5F9;
+  --navy:        #0F172A;
+  --navy-mid:    #1E293B;
+  --navy-light:  #334155;
+  --cyan:        #22D3EE;
+  --cyan-dark:   #06B6D4;
+  --cyan-dim:    rgba(34,211,238,0.10);
+  --cyan-border: rgba(34,211,238,0.30);
+  --gray:        #64748B;
+  --gray-light:  #94A3B8;
+  --gray-faint:  #CBD5E1;
+  --border:      #E2E8F0;
+  --border-mid:  #CBD5E1;
+  --green:       #10B981;
+  --shadow-xs:   0 1px 4px rgba(15,23,42,0.06);
+  --shadow-sm:   0 2px 12px rgba(15,23,42,0.07);
+  --shadow-md:   0 8px 32px rgba(15,23,42,0.09);
+  --shadow-lg:   0 20px 56px rgba(15,23,42,0.11);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+::selection{background:rgba(34,211,238,0.18);color:var(--navy)}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--navy-light);
+  line-height:1.65;
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3.5rem;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-brand{display:flex;align-items:center;gap:.7rem}
+.nav-mark{
+  width:34px;height:34px;border-radius:8px;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Serif Display',serif;
+  font-size:1rem;color:#fff;letter-spacing:.01em;
+}
+.nav-name{
+  font-family:'DM Sans',sans-serif;
+  font-size:.9rem;font-weight:600;color:var(--navy);letter-spacing:.01em;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gray);text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--cyan-dark)}
+.nav-cta{
+  padding:.5rem 1.4rem;
+  background:var(--navy);color:#fff;
+  font-size:.75rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;border-radius:6px;
+  transition:all .25s;
+}
+.nav-cta:hover{background:var(--cyan-dark);transform:translateY(-1px);box-shadow:0 4px 16px rgba(6,182,212,.25)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  padding:8rem 3.5rem 5rem;
+  display:flex;align-items:center;
+  position:relative;z-index:1;
+  background:var(--bg);
+}
+/* subtle top-left accent stripe */
+.hero::before{
+  content:'';
+  position:absolute;top:0;left:0;width:4px;height:100%;
+  background:linear-gradient(180deg,var(--cyan) 0%,transparent 100%);
+}
+.hero-inner{
+  max-width:1160px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 360px;gap:5rem;align-items:center;
+}
+
+.hero-pill{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.35rem 1rem;
+  background:var(--bg-muted);border:1px solid var(--border-mid);
+  border-radius:20px;
+  font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gray);
+  margin-bottom:1.75rem;
+  opacity:0;animation:up .7s ease .1s forwards;
+}
+.pill-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+.pill-avail{color:var(--green);font-weight:700}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+
+h1{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(3.25rem,5.5vw,5.75rem);
+  font-weight:400;
+  color:var(--navy);
+  line-height:1.08;
+  letter-spacing:-.01em;
+  margin-bottom:1.5rem;
+  opacity:0;animation:up .7s ease .25s forwards;
+}
+h1 em{font-style:italic;color:var(--cyan-dark)}
+h1 .sub{
+  display:block;
+  font-family:'DM Sans',sans-serif;
+  font-size:.32em;font-weight:400;
+  color:var(--gray);letter-spacing:.02em;
+  margin-top:.6rem;font-style:normal;
+}
+
+.hero-desc{
+  font-size:1.05rem;color:var(--gray);line-height:1.85;
+  max-width:500px;margin-bottom:2.5rem;
+  opacity:0;animation:up .7s ease .4s forwards;
+}
+.hero-desc strong{color:var(--cyan-dark);font-weight:600}
+
+.hero-btns{
+  display:flex;gap:.875rem;flex-wrap:wrap;
+  opacity:0;animation:up .7s ease .55s forwards;
+}
+.btn-fill{
+  padding:.85rem 2rem;background:var(--navy);color:#fff;
+  font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;border-radius:6px;
+  transition:all .25s;display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-fill:hover{background:var(--cyan-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(6,182,212,.25)}
+.btn-line{
+  padding:.85rem 2rem;
+  border:1.5px solid var(--border-mid);color:var(--navy-light);
+  font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;border-radius:6px;
+  transition:all .25s;
+}
+.btn-line:hover{border-color:var(--cyan-dark);color:var(--cyan-dark)}
+
+/* Stats card */
+.stat-card{
+  background:var(--navy);border-radius:12px;padding:2.25rem;
+  box-shadow:var(--shadow-lg);
+  opacity:0;animation:up .7s ease .65s forwards;
+}
+.stat-card-lbl{
+  font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gray-light);opacity:.6;
+  padding-bottom:1.1rem;border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:1.4rem;
+}
+.stat-row{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.stat-row:last-of-type{border-bottom:none}
+.stat-n{
+  font-family:'DM Serif Display',serif;
+  font-size:2.5rem;color:var(--cyan);line-height:1;
+}
+.stat-plus{font-family:'DM Sans',sans-serif;font-size:1.3rem;color:var(--gray-light);opacity:.6}
+.stat-r{text-align:right}
+.stat-name{font-size:.85rem;font-weight:600;color:#fff}
+.stat-note{font-size:.7rem;color:var(--gray-light);opacity:.6;margin-top:.15rem}
+.avail-row{
+  margin-top:1.4rem;padding-top:1.1rem;
+  border-top:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;gap:.55rem;
+}
+.avail-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+.avail-t{font-size:.74rem;font-weight:600;color:var(--green)}
+
+/* ── TICKER ── */
+.ticker{
+  background:var(--navy);overflow:hidden;padding:.8rem 0;
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.ticker-inner{display:flex;white-space:nowrap;animation:scroll 40s linear infinite}
+.tick{
+  display:inline-flex;align-items:center;gap:.7rem;
+  padding:0 2rem;flex-shrink:0;
+  font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgb(255, 255, 255);
+}
+.tsep{color:var(--cyan);font-size:.7rem}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTION ── */
+.sec{padding:7rem 3.5rem;max-width:1160px;margin:0 auto;position:relative;z-index:1}
+.sec-eye{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cyan-dark);margin-bottom:.75rem;
+}
+.sec-eye::before{content:'';width:24px;height:2px;background:var(--cyan-dark)}
+h2.sh{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,3.8vw,3.4rem);font-weight:400;
+  color:var(--navy);line-height:1.12;letter-spacing:-.01em;
+  margin-bottom:.875rem;
+}
+h2.sh em{font-style:italic;color:var(--cyan-dark)}
+.sec-sub{font-size:.975rem;color:var(--gray);line-height:1.8;max-width:520px}
+.sec-hdr{margin-bottom:4rem}
+
+/* divider */
+.rule{border:none;height:1px;background:var(--border)}
+.bg-soft{background:var(--bg-soft)}
+
+/* ── PROJECT GRID ── */
+.pg{display:grid;grid-template-columns:repeat(12,1fr);gap:1.25rem}
+.pc{grid-column:span 4}
+.pc.wide{grid-column:span 8}
+.pc.half{grid-column:span 6}
+
+.card{
+  background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  overflow:hidden;transition:transform .35s ease,border-color .3s,box-shadow .35s;
+  height:100%;display:flex;flex-direction:column;
+}
+.card:hover{
+  transform:translateY(-5px);border-color:var(--cyan-border);
+  box-shadow:0 12px 40px rgba(34,211,238,.08),var(--shadow-md);
+}
+.card-thumb{
+  height:175px;display:flex;align-items:center;justify-content:center;
+  position:relative;border-bottom:1px solid var(--border);
+}
+.pc.wide .card-thumb{height:215px}
+.thumb-emoji{font-size:2.75rem;position:relative;z-index:1}
+.ctype{
+  position:absolute;top:.75rem;left:.75rem;
+  padding:.25rem .65rem;
+  background:var(--navy);
+  font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cyan);border-radius:4px;
+}
+.clive{
+  position:absolute;top:.75rem;right:.75rem;
+  padding:.25rem .65rem;
+  background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);
+  font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);border-radius:4px;
+  display:flex;align-items:center;gap:.35rem;
+}
+.ld{width:4px;height:4px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+.card-body{padding:1.4rem 1.6rem 1.75rem;flex:1;display:flex;flex-direction:column}
+.card-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1.3rem;font-weight:400;color:var(--navy);
+  margin-bottom:.5rem;letter-spacing:-.01em;
+}
+.card-desc{font-size:.85rem;color:var(--gray);line-height:1.78;margin-bottom:1.1rem;flex:1}
+.card-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.1rem}
+.tag{
+  padding:.22rem .6rem;
+  background:var(--bg-muted);border:1px solid var(--border);
+  font-size:.62rem;font-weight:600;letter-spacing:.04em;
+  color:var(--gray);border-radius:4px;transition:all .2s;
+}
+.tag:hover{border-color:var(--cyan-border);color:var(--cyan-dark);background:var(--cyan-dim)}
+.tag.hi{background:var(--cyan-dim);border-color:var(--cyan-border);color:var(--cyan-dark)}
+.card-link{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--cyan-dark);text-decoration:none;transition:gap .25s;
+}
+.card-link:hover{gap:.8rem}
+
+/* thumb bgs */
+.t1{background:linear-gradient(145deg,#EFF6FF,#DBEAFE)}
+.t2{background:linear-gradient(145deg,#ECFDF5,#D1FAE5)}
+.t3{background:linear-gradient(145deg,#ECFEFF,#CFFAFE)}
+.t4{background:linear-gradient(145deg,#FDF4FF,#FAE8FF)}
+.t5{background:linear-gradient(145deg,#FFFBEB,#FEF3C7)}
+.t6{background:linear-gradient(145deg,#FFF7ED,#FFEDD5)}
+.t7{background:linear-gradient(145deg,#F0FDF4,#DCFCE7)}
+
+/* ── LMS SPOTLIGHT ── */
+.lms-box{
+  margin-top:3.5rem;
+  border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+.lms-top{
+  background:var(--navy);padding:2.25rem 2.75rem;
+  display:grid;grid-template-columns:auto 1fr;gap:1.75rem;align-items:center;
+}
+.lms-ico{
+  width:52px;height:52px;border-radius:10px;
+  background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+}
+.lms-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1.65rem;font-weight:400;color:#fff;margin-bottom:.3rem;
+}
+.lms-title em{font-style:italic;color:var(--cyan)}
+.lms-sub{color:rgba(255,255,255,.6);font-size:.88rem;line-height:1.75}
+.lms-body{
+  background:var(--bg-soft);padding:2.25rem 2.75rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+}
+.lms-lbl{
+  font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gray-light);margin-bottom:.875rem;
+}
+.lms-caps{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.lms-cap{
+  padding:.6rem .85rem;
+  background:var(--bg);border:1px solid var(--border);border-radius:5px;
+  font-size:.76rem;font-weight:500;color:var(--navy-light);
+  display:flex;align-items:center;gap:.5rem;
+  transition:border-color .2s,color .2s;
+}
+.lms-cap:hover{border-color:var(--cyan-border);color:var(--cyan-dark)}
+.lms-cap::before{content:'✓';color:var(--cyan-dark);font-size:.65rem;flex-shrink:0;font-weight:700}
+.lms-ints{display:flex;flex-direction:column;gap:.6rem}
+.lms-int{
+  padding:.9rem 1.1rem;
+  background:var(--bg);border:1px solid var(--border);border-radius:6px;
+  display:flex;gap:.875rem;align-items:flex-start;
+  transition:border-color .25s;
+}
+.lms-int:hover{border-color:var(--cyan-border)}
+.lms-int-ico{font-size:1.1rem;margin-top:.05rem}
+.lms-int-n{font-size:.84rem;font-weight:600;color:var(--navy)}
+.lms-int-d{font-size:.72rem;color:var(--gray);margin-top:.1rem}
+
+/* ── SKILLS ── */
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.sk-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  padding:1.85rem 1.65rem;
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.sk-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s;
+}
+.sk-card:hover{border-color:var(--cyan-border);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.sk-card:hover::after{transform:scaleX(1)}
+.sk-icon{font-size:1.6rem;margin-bottom:1rem;display:block}
+.sk-label{
+  font-family:'DM Serif Display',serif;
+  font-size:1.15rem;font-weight:400;color:var(--navy);
+  margin-bottom:1.1rem;letter-spacing:-.01em;
+}
+.sk-items{display:flex;flex-direction:column}
+.sk-item{
+  padding:.45rem 0;border-bottom:1px solid var(--border);
+  font-size:.82rem;color:var(--gray);
+  display:flex;align-items:center;gap:.55rem;
+}
+.sk-item:last-child{border-bottom:none}
+.sk-item::before{content:'';width:4px;height:4px;background:var(--gray-faint);border-radius:50%;flex-shrink:0}
+.sk-item.hot{color:var(--cyan-dark);font-weight:600}
+.sk-item.hot::before{background:var(--cyan-dark)}
+
+/* ── TIMELINE ── */
+.tl{position:relative}
+.tl::before{
+  content:'';position:absolute;left:162px;top:0;bottom:0;
+  width:1px;background:var(--border);
+}
+.tl-row{
+  display:grid;grid-template-columns:162px 1fr;gap:0;
+  margin-bottom:1.75rem;position:relative;
+  align-items:start;
+}
+.tl-row:last-child{margin-bottom:0}
+.tl-left{
+  text-align:right;
+  padding-right:2rem;
+  padding-top:1.5rem;
+  position:relative;
+}
+/* dot sits right on the vertical line, vertically centered with the role title */
+.tl-left::after{
+  content:'';
+  position:absolute;
+  right:-6px; top:1.75rem;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--gray-faint);
+  transition:border-color .25s,background .25s;
+  z-index:2;
+}
+.tl-row:hover .tl-left::after{border-color:var(--cyan-dark);background:var(--cyan-dark)}
+.tl-date{
+  font-size:.69rem;font-weight:600;letter-spacing:.05em;
+  color:var(--gray-light);line-height:1.6;
+}
+.tl-right{padding-left:2rem}
+.tl-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  padding:1.5rem 1.75rem;
+  transition:border-color .3s,box-shadow .3s;
+}
+.tl-row:hover .tl-card{border-color:var(--cyan-border);box-shadow:var(--shadow-sm)}
+.tl-role{
+  font-family:'DM Serif Display',serif;
+  font-size:1.25rem;font-weight:400;color:var(--navy);
+  letter-spacing:-.01em;margin-bottom:.3rem;
+}
+.tl-co{
+  font-size:.8rem;font-weight:600;color:var(--cyan-dark);
+  margin-bottom:.75rem;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;
+}
+.tl-sep{color:var(--gray-faint)}
+.tl-loc{color:var(--gray);font-weight:400}
+.tl-desc{font-size:.86rem;color:var(--gray);line-height:1.8}
+.tl-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.875rem}
+.ttag{
+  padding:.22rem .6rem;border-radius:4px;
+  font-size:.62rem;font-weight:600;
+  background:var(--bg-muted);border:1px solid var(--border);color:var(--gray);
+}
+.ttag.lms{background:var(--cyan-dim);border-color:var(--cyan-border);color:var(--cyan-dark)}
+.ttag.edu{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25);color:#B45309}
+
+/* responsive timeline override */
+@media(max-width:1100px){
+  .tl::before{left:0 !important}
+  .tl-row{grid-template-columns:1fr !important;gap:.4rem !important;padding-left:1.5rem}
+  .tl-left{text-align:left !important;padding-top:0 !important;padding-right:0 !important}
+  .tl-left::after{left:-1.5rem !important;right:auto !important;top:.2rem !important}
+  .tl-right{padding-left:0 !important}
+}
+
+/* ── COMMUNITY ── */
+.cm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.cm-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  padding:2.1rem 1.85rem;
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.cm-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--cyan-dark),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s;
+}
+.cm-card:hover{border-color:var(--cyan-border);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.cm-card:hover::before{transform:scaleX(1)}
+.cm-icon{font-size:1.85rem;margin-bottom:1rem;display:block}
+.cm-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1.15rem;font-weight:400;color:var(--navy);margin-bottom:.6rem;
+}
+.cm-desc{font-size:.84rem;color:var(--gray);line-height:1.8}
+.cm-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:1rem;padding:.3rem .75rem;
+  background:var(--cyan-dim);border:1px solid var(--cyan-border);
+  border-radius:4px;
+  font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--cyan-dark);
+}
+.cm-badge-dot{width:5px;height:5px;background:var(--cyan-dark);border-radius:50%}
+
+/* ── CONTACT ── */
+.contact-band{
+  margin:0 3.5rem 5rem;
+  background:var(--navy);border-radius:14px;overflow:hidden;
+  box-shadow:var(--shadow-lg);position:relative;z-index:1;
+}
+.cb-inner{
+  padding:5rem 4rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+  max-width:1160px;margin:0 auto;
+}
+.cb-eye{
+  display:flex;align-items:center;gap:.55rem;
+  font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:1rem;
+}
+.cb-eye::before{content:'';width:24px;height:1.5px;background:var(--cyan)}
+.cb-h{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,3.5vw,3.25rem);font-weight:400;
+  color:#fff;line-height:1.1;letter-spacing:-.01em;margin-bottom:1.1rem;
+}
+.cb-h em{font-style:italic;color:var(--cyan)}
+.cb-p{font-size:.92rem;color:rgba(255,255,255,.55);line-height:1.85;margin-bottom:2rem}
+.btn-cyan{
+  padding:.85rem 2rem;background:var(--cyan);color:var(--navy);
+  font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;border-radius:6px;
+  transition:all .25s;display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-cyan:hover{background:#67E8F9;transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,211,238,.3)}
+.clinks{display:flex;flex-direction:column;gap:.7rem}
+.clink{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.25rem;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:8px;text-decoration:none;transition:all .25s;
+}
+.clink:hover{background:rgba(34,211,238,.08);border-color:rgba(34,211,238,.25);transform:translateX(4px)}
+.clink-ico{font-size:1.2rem}
+.clink-lbl{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.clink-val{font-size:.85rem;font-weight:600;color:#fff;margin-top:.1rem}
+.clink-arr{margin-left:auto;color:rgba(255,255,255,.3);transition:transform .25s,color .25s}
+.clink:hover .clink-arr{transform:translateX(4px);color:var(--cyan)}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);padding:1.6rem 3.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:1;
+}
+footer p{font-size:.75rem;color:var(--gray-light)}
+.foot-links{display:flex;gap:1.5rem}
+.foot-links a{
+  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gray-light);text-decoration:none;transition:color .2s;
+}
+.foot-links a:hover{color:var(--cyan-dark)}
+
+/* ── ANIMATIONS ── */
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.fi{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fi.on{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .hero-inner{grid-template-columns:1fr;max-width:640px}
+  .stat-card{display:none}
+  .pc,.pc.wide,.pc.half{grid-column:span 12}
+  .sk-grid{grid-template-columns:repeat(2,1fr)}
+  .lms-body{grid-template-columns:1fr}
+  .cm-grid{grid-template-columns:1fr}
+  .cb-inner{grid-template-columns:1fr;gap:3rem}
+}
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .hero{padding:6rem 1.5rem 3rem}
+  .sec{padding:5rem 1.5rem}
+  .sk-grid{grid-template-columns:1fr}
+  .contact-band{margin:0 1.5rem 4rem}
+  .cb-inner{padding:3rem 1.75rem}
+  footer{flex-direction:column;gap:.875rem;text-align:center;padding:1.5rem}
+  .lms-top{grid-template-columns:1fr;gap:1rem}
+  .lms-caps{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-label">Senior WordPress Developer</div>
-            <h1>Madhvi Koshti Desai</h1>
-            <p class="hero-description">
-                Transforming ideas into powerful WordPress solutions. Specialized in custom plugin development, WooCommerce, and scalable enterprise websites with a proven track record across diverse industries.
-            </p>
-            <div class="stats-grid">
-                <div class="stat">
-                    <div class="stat-number">5+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">100+</div>
-                    <div class="stat-label">Projects Delivered</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Happy Clients</div>
-                </div>
-            </div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-mark">M</div>
+    <div class="nav-name">Madhvi Koshti Desai</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-pill">
+        <div class="pill-dot"></div>
+        Senior WordPress Developer &nbsp;·&nbsp;
+        <span class="pill-avail">Available for Freelance</span>
+      </div>
+
+      <h1>
+        <em>Madhvi</em><br>Koshti Desai
+        <span class="sub">Building Powerful WordPress Solutions Since 2020</span>
+      </h1>
+
+      <p class="hero-desc">
+        Transforming ideas into high-performance WordPress platforms. Specialized in <strong>LearnDash LMS</strong>, custom plugin development, WooCommerce, BuddyBoss, and scalable enterprise systems — 5+ years delivering across education, e-commerce, and healthcare.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#projects" class="btn-fill">View Projects →</a>
+        <a href="mailto:madhvikoshti09@gmail.com" class="btn-line">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-card-lbl">At a Glance</div>
+      <div class="stat-row">
+        <div class="stat-n">5<span class="stat-plus">+</span></div>
+        <div class="stat-r">
+          <div class="stat-name">Years Experience</div>
+          <div class="stat-note">WordPress Development</div>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="section">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">A showcase of recent WordPress projects demonstrating custom development, performance optimization, and creative problem-solving.</p>
+      </div>
+      <div class="stat-row">
+        <div class="stat-n">100<span class="stat-plus">+</span></div>
+        <div class="stat-r">
+          <div class="stat-name">Projects Delivered</div>
+          <div class="stat-note">Across diverse industries</div>
         </div>
-
-        <div class="projects-grid">
-            <!-- Project 1 - Finale 3D -->
-            <div class="project-card fade-in">
-                <div class="project-image">💥</div>
-                <div class="project-content">
-                    <span class="project-tag">E-Commerce Platform</span>
-                    <h3 class="project-title">Finale 3D</h3>
-                    <p class="project-description">
-                        World's most powerful fireworks design software platform. Built using Easy Digital Downloads with custom workflows, secure payment processing, subscription management, and comprehensive SEO optimization.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">WordPress</span>
-                        <span class="tech-badge">Easy Digital Downloads</span>
-                        <span class="tech-badge">bbPress</span>
-                        <span class="tech-badge">Custom Workflows</span>
-                    </div>
-                    <a href="https://finale3d.com/" target="_blank" class="project-link">View Project →</a>
-                </div>
-            </div>
-
-            <!-- Project 2 - FisioScience -->
-            <div class="project-card fade-in">
-                <div class="project-image">🏥</div>
-                <div class="project-content">
-                    <span class="project-tag">Educational Platform</span>
-                    <h3 class="project-title">FisioScience</h3>
-                    <p class="project-description">
-                        Italian physiotherapy education platform with BuddyBoss-powered membership community (club.fisioscience.it). Integrated LMS, course management, and comprehensive multilingual content delivery system.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">WordPress</span>
-                        <span class="tech-badge">BuddyBoss</span>
-                        <span class="tech-badge">WooCommerce</span>
-                        <span class="tech-badge">WPML</span>
-                    </div>
-                    <a href="https://www.fisioscience.it/" target="_blank" class="project-link">View Project →</a>
-                </div>
-            </div>
-
-            <!-- Project 3 - Gift Vouchers Plugin -->
-            <div class="project-card fade-in">
-                <div class="project-image">🎁</div>
-                <div class="project-content">
-                    <span class="project-tag">Plugin Development</span>
-                    <h3 class="project-title">Gift Vouchers for WooCommerce</h3>
-                    <p class="project-description">
-                        WordPress.org featured plugin enabling personalized PDF voucher generation with custom templates, email delivery, and flexible redemption system for WooCommerce stores.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">PHP</span>
-                        <span class="tech-badge">WooCommerce</span>
-                        <span class="tech-badge">TCPDF</span>
-                        <span class="tech-badge">REST API</span>
-                    </div>
-                    <a href="https://wordpress.org/plugins/gift-vouchers-for-woocommerce/" target="_blank" class="project-link">View Project →</a>
-                </div>
-            </div>
-
-            <!-- Project 4 - Cheran College of Pharmacy -->
-            <div class="project-card fade-in">
-                <div class="project-image">🎓</div>
-                <div class="project-content">
-                    <span class="project-tag">Multisite Architecture</span>
-                    <h3 class="project-title">Cheran Colleges</h3>
-                    <p class="project-description">
-                        Built WordPress Multisite architecture hosting multiple college subdomains. Features include course registrations, event scheduling, student management portal, and NAAC accreditation documentation.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">WordPress Multisite</span>
-                        <span class="tech-badge">Custom Theme</span>
-                        <span class="tech-badge">ACF</span>
-                        <span class="tech-badge">Student Portal</span>
-                    </div>
-                    <a href="https://ccp.ac.in/" target="_blank" class="project-link">View Project →</a>
-                </div>
-            </div>
-
-            <!-- Project 5 - Xivada -->
-            <div class="project-card fade-in">
-                <div class="project-image">🛒</div>
-                <div class="project-content">
-                    <span class="project-tag">E-Commerce Store</span>
-                    <h3 class="project-title">Xivada.nl</h3>
-                    <p class="project-description">
-                        Dutch home organization e-commerce platform with extensive product catalog, multi-category navigation, and optimized checkout experience for bathroom and kitchen accessories.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">WooCommerce</span>
-                        <span class="tech-badge">Custom Theme</span>
-                        <span class="tech-badge">Payment Gateways</span>
-                        <span class="tech-badge">Dutch</span>
-                    </div>
-                    <a href="https://xivada.nl/" target="_blank" class="project-link">View Project →</a>
-                </div>
-            </div>
-
-            <!-- Project 6 - Cheran College of Technology -->
-            <div class="project-card fade-in">
-                <div class="project-image">⚙️</div>
-                <div class="project-content">
-                    <span class="project-tag">Educational Institution</span>
-                    <h3 class="project-title">Cheran College of Technology</h3>
-                    <p class="project-description">
-                        Engineering college website with comprehensive program showcases, online admission portal, placement records, and student resources including Innovation Hub section.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">WordPress</span>
-                        <span class="tech-badge">Custom Theme</span>
-                        <span class="tech-badge">ACF Pro</span>
-                        <span class="tech-badge">Gallery</span>
-                    </div>
-                    <a href="https://cct.ac.in/" target="_blank" class="project-link">View Project →</a>
-                </div>
-            </div>
-
-            <!-- Project 7 - Crypto Advisor USA -->
-            <div class="project-card fade-in">
-                <div class="project-image">💰</div>
-                <div class="project-content">
-                    <span class="project-tag">Financial Consulting</span>
-                    <h3 class="project-title">Crypto Advisor USA</h3>
-                    <p class="project-description">
-                        Cryptocurrency consulting and education platform providing expert guidance, portfolio management tools, and comprehensive crypto investment resources.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">WordPress</span>
-                        <span class="tech-badge">Custom Design</span>
-                        <span class="tech-badge">Contact Forms</span>
-                        <span class="tech-badge">SEO</span>
-                    </div>
-                    <a href="https://cryptoadvisorusa.com/" target="_blank" class="project-link">View Project →</a>
-                </div>
-            </div>
-
-            <!-- Project 8 - Additional Project Slot -->
-            <div class="project-card fade-in">
-                <div class="project-image">✨</div>
-                <div class="project-content">
-                    <span class="project-tag">Custom Development</span>
-                    <h3 class="project-title">Your Next Project</h3>
-                    <p class="project-description">
-                        Looking for a WordPress developer who delivers exceptional results? Let's discuss how I can help bring your vision to life with custom themes, plugins, and optimized solutions.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">WordPress</span>
-                        <span class="tech-badge">WooCommerce</span>
-                        <span class="tech-badge">Custom Solutions</span>
-                        <span class="tech-badge">Performance</span>
-                    </div>
-                    <a href="#contact" class="project-link">Get In Touch →</a>
-                </div>
-            </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-n">15<span class="stat-plus">+</span></div>
+        <div class="stat-r">
+          <div class="stat-name">Happy Clients</div>
+          <div class="stat-note">Long-term relationships</div>
         </div>
-    </section>
+      </div>
+      <div class="avail-row">
+        <div class="avail-dot"></div>
+        <div class="avail-t">Open for freelance projects</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Skills Section -->
-    <section class="section">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Technical Expertise</h2>
-            <p class="section-subtitle">Comprehensive skill set covering the entire WordPress development ecosystem.</p>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="tick"><span class="tsep">◆</span>WordPress Development</span>
+    <span class="tick"><span class="tsep">◆</span>LearnDash LMS</span>
+    <span class="tick"><span class="tsep">◆</span>WooCommerce</span>
+    <span class="tick"><span class="tsep">◆</span>BuddyBoss Platform</span>
+    <span class="tick"><span class="tsep">◆</span>Custom Plugin Development</span>
+    <span class="tick"><span class="tsep">◆</span>WordPress Multisite</span>
+    <span class="tick"><span class="tsep">◆</span>REST API Integration</span>
+    <span class="tick"><span class="tsep">◆</span>Easy Digital Downloads</span>
+    <span class="tick"><span class="tsep">◆</span>Moodle Customization</span>
+    <span class="tick"><span class="tsep">◆</span>Performance Optimization</span>
+    <span class="tick"><span class="tsep">◆</span>WPML Multilingual</span>
+    <span class="tick"><span class="tsep">◆</span>ACF Pro</span>
+    <span class="tick"><span class="tsep">◆</span>WordPress Development</span>
+    <span class="tick"><span class="tsep">◆</span>LearnDash LMS</span>
+    <span class="tick"><span class="tsep">◆</span>WooCommerce</span>
+    <span class="tick"><span class="tsep">◆</span>BuddyBoss Platform</span>
+    <span class="tick"><span class="tsep">◆</span>Custom Plugin Development</span>
+    <span class="tick"><span class="tsep">◆</span>WordPress Multisite</span>
+    <span class="tick"><span class="tsep">◆</span>REST API Integration</span>
+    <span class="tick"><span class="tsep">◆</span>Easy Digital Downloads</span>
+    <span class="tick"><span class="tsep">◆</span>Moodle Customization</span>
+    <span class="tick"><span class="tsep">◆</span>Performance Optimization</span>
+    <span class="tick"><span class="tsep">◆</span>WPML Multilingual</span>
+    <span class="tick"><span class="tsep">◆</span>ACF Pro</span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="sec" id="projects">
+  <div class="sec-hdr fi">
+    <div class="sec-eye">Selected Work</div>
+    <h2 class="sh">Featured <em>Projects</em></h2>
+    <p class="sec-sub">A curated showcase demonstrating custom development, LMS integration, performance optimization, and creative problem-solving across diverse industries.</p>
+  </div>
+
+  <div class="pg">
+    <!-- Finale 3D -->
+    <div class="pc wide fi">
+      <div class="card">
+        <div class="card-thumb t1">
+          <div class="thumb-emoji">💥</div>
+          <div class="ctype">E-Commerce Platform</div>
+          <div class="clive"><div class="ld"></div>Live</div>
         </div>
-
-        <div class="skills-container">
-            <div class="skill-category fade-in">
-                <div class="skill-icon">⚙️</div>
-                <h3 class="skill-category-title">WordPress Expertise</h3>
-                <ul class="skill-list">
-                    <li>Custom Plugin Development</li>
-                    <li>Custom Theme Development</li>
-                    <li>WordPress Core & APIs</li>
-                    <li>Custom Post Types & Taxonomies</li>
-                    <li>Gutenberg Block Development</li>
-                    <li>WordPress Multisite Setup</li>
-                </ul>
-            </div>
-
-            <div class="skill-category fade-in">
-                <div class="skill-icon">🛒</div>
-                <h3 class="skill-category-title">E-Commerce & Platforms</h3>
-                <ul class="skill-list">
-                    <li>WooCommerce Customization</li>
-                    <li>Easy Digital Downloads</li>
-                    <li>BuddyBoss & MemberPress</li>
-                    <li>WPML (Multilingual)</li>
-                    <li>Advanced Custom Fields (ACF)</li>
-                    <li>Moodle Customization</li>
-                </ul>
-            </div>
-
-            <div class="skill-category fade-in">
-                <div class="skill-icon">💻</div>
-                <h3 class="skill-category-title">Technical Stack</h3>
-                <ul class="skill-list">
-                    <li>PHP, MySQL & Database Optimization</li>
-                    <li>HTML5, CSS3, SCSS</li>
-                    <li>JavaScript, jQuery, AJAX</li>
-                    <li>React.js (Gutenberg Blocks)</li>
-                    <li>REST API & JSON Integration</li>
-                    <li>Git/GitLab Version Control</li>
-                </ul>
-            </div>
-
-            <div class="skill-category fade-in">
-                <div class="skill-icon">🚀</div>
-                <h3 class="skill-category-title">Optimization & Security</h3>
-                <ul class="skill-list">
-                    <li>Performance & Speed Optimization</li>
-                    <li>Caching & CDN Setup</li>
-                    <li>Security Best Practices</li>
-                    <li>SEO Optimization</li>
-                    <li>Debugging & Troubleshooting</li>
-                    <li>WordPress Coding Standards</li>
-                </ul>
-            </div>
+        <div class="card-body">
+          <div class="card-title">Finale 3D</div>
+          <p class="card-desc">World's most powerful fireworks design software platform. Built with Easy Digital Downloads — custom purchase workflows, secure payment processing, subscription management, bbPress community forums, and comprehensive technical SEO optimization.</p>
+          <div class="card-tags">
+            <span class="tag">WordPress</span><span class="tag">Easy Digital Downloads</span>
+            <span class="tag">bbPress</span><span class="tag">Custom Workflows</span><span class="tag">SEO</span>
+          </div>
+          <a href="https://finale3d.com/" target="_blank" class="card-link">Visit Site →</a>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Professional Journey Section -->
-    <section class="section">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Professional Journey</h2>
-            <p class="section-subtitle">5+ years of growth, learning, and delivering exceptional WordPress solutions across diverse industries.</p>
+    <!-- FisioScience -->
+    <div class="pc fi">
+      <div class="card">
+        <div class="card-thumb t2">
+          <div class="thumb-emoji">🏥</div>
+          <div class="ctype">Educational</div>
+          <div class="clive"><div class="ld"></div>Live</div>
         </div>
-
-        <div class="timeline">
-            <div class="timeline-item fade-in">
-                <div class="timeline-marker">
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-period">Sep 2025 – Dec 2025</div>
-                    <h3 class="timeline-title">Senior WordPress Developer</h3>
-                    <div class="timeline-company">Wildnet Technologies · Remote</div>
-                    <p class="timeline-description">
-                        Managed comprehensive content operations for WordPress sites including formatting, media optimization, SEO implementation, and executing client content updates across pages, blogs, and landing pages.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item fade-in">
-                <div class="timeline-marker">
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-period">Nov 2024 – March 2025</div>
-                    <h3 class="timeline-title">Senior WordPress Backend Developer</h3>
-                    <div class="timeline-company">Binstellar Technologies · Ahmedabad</div>
-                    <p class="timeline-description">
-                        Specialized in third-party API integrations, database optimization, and Moodle customization. Created custom Moodle plugins to meet specific client requirements while enhancing platform functionality.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item fade-in">
-                <div class="timeline-marker">
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-period">Jan 2024 – Oct 2024</div>
-                    <h3 class="timeline-title">WordPress Developer</h3>
-                    <div class="timeline-company">World Web Technology · Ahmedabad</div>
-                    <p class="timeline-description">
-                        Mastered WordPress ecosystem working with WooCommerce, Gutenberg, ACF, WPML, BuddyBoss, and MemberPress. Developed custom solutions leveraging taxonomies, custom post types, and advanced fields.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item fade-in">
-                <div class="timeline-marker">
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-period">Dec 2022 – Jan 2024</div>
-                    <h3 class="timeline-title">WordPress Developer</h3>
-                    <div class="timeline-company">Hyperlink Infosystem · Ahmedabad</div>
-                    <p class="timeline-description">
-                        Built custom themes and plugins, migrated websites from various platforms to WordPress, and developed APIs for multilingual websites while managing multiple concurrent projects.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item fade-in">
-                <div class="timeline-marker">
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-period">Dec 2020 – Nov 2022</div>
-                    <h3 class="timeline-title">Associate Software Engineer</h3>
-                    <div class="timeline-company">Bytes Technolab · Ahmedabad</div>
-                    <p class="timeline-description">
-                        Coordinated with project teams, wrote clean code following WordPress standards, and specialized in page speed optimization. Foundation period that established strong technical skills.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item fade-in">
-                <div class="timeline-marker">
-                    <div class="timeline-dot"></div>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-period">May 2019</div>
-                    <h3 class="timeline-title">Bachelor of Computer Applications</h3>
-                    <div class="timeline-company">Gujarat University</div>
-                    <p class="timeline-description">
-                        Graduated with strong foundation in computer science, programming, and software development principles.
-                    </p>
-                </div>
-            </div>
+        <div class="card-body">
+          <div class="card-title">FisioScience</div>
+          <p class="card-desc">Italian physiotherapy education platform with WooCommerce subscriptions, WPML multilingual content delivery, and seamless integration with the FisioScience Club learning community.</p>
+          <div class="card-tags">
+            <span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">WPML</span>
+          </div>
+          <a href="https://www.fisioscience.it/" target="_blank" class="card-link">Visit Site →</a>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- WordPress Community Section -->
-    <section class="section">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Community Involvement</h2>
-            <p class="section-subtitle">Active contributor to the WordPress ecosystem through events, knowledge sharing, and community engagement.</p>
+    <!-- FisioScience Club — LMS Featured -->
+    <div class="pc half fi">
+      <div class="card" style="border-color:var(--cyan-border)">
+        <div class="card-thumb t3">
+          <div class="thumb-emoji">🎓</div>
+          <div class="ctype" style="background:var(--cyan-dark);color:#fff">LMS Community</div>
+          <div class="clive"><div class="ld"></div>Live</div>
         </div>
-
-        <div class="community-grid">
-            <div class="community-card fade-in">
-                <div class="community-icon">🎤</div>
-                <h3 class="community-title">WordCamp Participant</h3>
-                <p class="community-description">
-                    Regular attendee and active participant at WordCamp events, staying connected with the latest WordPress trends, networking with fellow developers, and contributing to community discussions.
-                </p>
-            </div>
-
-            <div class="community-card fade-in">
-                <div class="community-icon">💬</div>
-                <h3 class="community-title">WordPress Communities</h3>
-                <p class="community-description">
-                    Actively engaged in WordPress communities, sharing knowledge, helping fellow developers solve challenges, and staying updated with best practices and emerging technologies in the ecosystem.
-                </p>
-            </div>
-
-            <div class="community-card fade-in">
-                <div class="community-icon">🤝</div>
-                <h3 class="community-title">Knowledge Sharing</h3>
-                <p class="community-description">
-                    Committed to giving back to the community through code contributions, WordPress.org plugin development, and participating in developer forums and meetups.
-                </p>
-            </div>
+        <div class="card-body">
+          <div class="card-title">FisioScience Club</div>
+          <p class="card-desc">Full-featured physiotherapy learning community at club.fisioscience.it — powered by LearnDash LMS and BuddyBoss. Membership-gated platform with structured course tracks, quizzes, progress tracking, certificates, a social community layer, WooCommerce subscription billing, and WPML Italian/English delivery.</p>
+          <div class="card-tags">
+            <span class="tag hi">LearnDash LMS</span><span class="tag hi">BuddyBoss</span>
+            <span class="tag">WooCommerce Subscriptions</span><span class="tag">WPML</span>
+            <span class="tag">Course Builder</span><span class="tag">Certificates</span><span class="tag">Membership</span>
+          </div>
+          <a href="https://club.fisioscience.it/" target="_blank" class="card-link">Visit Platform →</a>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section fade-in">
-        <h2 class="contact-title">Let's Build Something Great</h2>
-        <p class="contact-description">
-            Available for freelance projects and consulting. Let's discuss how I can help bring your WordPress vision to life with custom solutions tailored to your needs.
-        </p>
-        <div class="contact-links">
-            <a href="mailto:madhvikoshti09@gmail.com" class="contact-btn">
-                📧 madhvikoshti09@gmail.com
-            </a>
-            <a href="https://github.com/Kmadhvi" class="contact-btn secondary" target="_blank">
-                💻 GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/madhvi-desai/" class="contact-btn secondary" target="_blank">
-                💼 LinkedIn
-            </a>
+    <!-- Gift Vouchers -->
+    <div class="pc half fi">
+      <div class="card">
+        <div class="card-thumb t4">
+          <div class="thumb-emoji">🎁</div>
+          <div class="ctype">Plugin Dev</div>
+          <div class="clive"><div class="ld"></div>Published</div>
         </div>
-    </section>
+        <div class="card-body">
+          <div class="card-title">Gift Vouchers for WooCommerce</div>
+          <p class="card-desc">WordPress.org featured plugin enabling personalized PDF voucher generation with custom templates, email delivery, and flexible redemption system for WooCommerce stores.</p>
+          <div class="card-tags">
+            <span class="tag">PHP</span><span class="tag">WooCommerce</span><span class="tag">TCPDF</span><span class="tag">REST API</span>
+          </div>
+          <a href="https://wordpress.org/plugins/gift-vouchers-for-woocommerce/" target="_blank" class="card-link">View Plugin →</a>
+        </div>
+      </div>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Madhvi Koshti Desai. Senior WordPress Developer specializing in custom solutions.</p>
-    </footer>
+    <!-- Cheran -->
+    <div class="pc fi">
+      <div class="card">
+        <div class="card-thumb t5">
+          <div class="thumb-emoji">🏛️</div>
+          <div class="ctype">Multisite</div>
+          <div class="clive"><div class="ld"></div>Live</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Cheran Colleges</div>
+          <p class="card-desc">WordPress Multisite architecture hosting multiple college subdomains — course registrations, event scheduling, student management portal, and NAAC accreditation documentation.</p>
+          <div class="card-tags">
+            <span class="tag">Multisite</span><span class="tag">Custom Theme</span><span class="tag">ACF</span>
+          </div>
+          <a href="https://ccp.ac.in/" target="_blank" class="card-link">View Project →</a>
+        </div>
+      </div>
+    </div>
 
-    <script>
-        // Scroll animation observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+    <!-- Xivada -->
+    <div class="pc fi">
+      <div class="card">
+        <div class="card-thumb t6">
+          <div class="thumb-emoji">🛒</div>
+          <div class="ctype">E-Commerce</div>
+          <div class="clive"><div class="ld"></div>Live</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Xivada.nl</div>
+          <p class="card-desc">Dutch home organization e-commerce with extensive product catalog, multi-category navigation, and optimized checkout for bathroom and kitchen accessories.</p>
+          <div class="card-tags">
+            <span class="tag">WooCommerce</span><span class="tag">Custom Theme</span><span class="tag">Payments</span>
+          </div>
+          <a href="https://xivada.nl/" target="_blank" class="card-link">View Project →</a>
+        </div>
+      </div>
+    </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+    <!-- Crypto -->
+    <div class="pc fi">
+      <div class="card">
+        <div class="card-thumb t7">
+          <div class="thumb-emoji">₿</div>
+          <div class="ctype">Financial</div>
+          <div class="clive"><div class="ld"></div>Live</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Crypto Advisor USA</div>
+          <p class="card-desc">Cryptocurrency consulting and education platform with expert guidance, portfolio management tools, and comprehensive investment resources.</p>
+          <div class="card-tags">
+            <span class="tag">WordPress</span><span class="tag">Custom Design</span><span class="tag">SEO</span>
+          </div>
+          <a href="https://cryptoadvisorusa.com/" target="_blank" class="card-link">View Project →</a>
+        </div>
+      </div>
+    </div>
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+    <!-- CTA -->
+    <div class="pc fi">
+      <div class="card" style="border-style:dashed;background:var(--bg-soft);justify-content:center;align-items:center;text-align:center;padding:2.5rem 1.75rem;cursor:pointer" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+        <div style="font-size:2rem;color:var(--cyan-dark);margin-bottom:.875rem">✦</div>
+        <div class="card-title" style="font-size:1.1rem">Your Next Project</div>
+        <p class="card-desc" style="text-align:center;margin-top:.5rem">Looking for a WordPress developer who delivers? Let's talk.</p>
+        <a href="#contact" class="card-link" style="margin-top:1rem;display:inline-flex" onclick="event.stopPropagation()">Start Conversation →</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+<!-- SKILLS -->
+<hr class="rule">
+<section class="bg-soft">
+  <div class="sec" id="skills">
+    <div class="sec-hdr fi">
+      <div class="sec-eye">Technical Arsenal</div>
+      <h2 class="sh">Skills &amp; <em>Expertise</em></h2>
+      <p class="sec-sub">Comprehensive skill set covering the entire WordPress ecosystem, with deep specialization in LMS platforms and e-commerce solutions.</p>
+    </div>
+
+    <div class="sk-grid fi">
+      <div class="sk-card">
+        <span class="sk-icon">⚙️</span>
+        <div class="sk-label">WordPress Core</div>
+        <div class="sk-items">
+          <div class="sk-item">Custom Plugin Development</div>
+          <div class="sk-item">Custom Theme Development</div>
+          <div class="sk-item">WordPress Core &amp; APIs</div>
+          <div class="sk-item">Custom Post Types &amp; Taxonomies</div>
+          <div class="sk-item">Gutenberg Block Development</div>
+          <div class="sk-item">WordPress Multisite</div>
+        </div>
+      </div>
+      <div class="sk-card" style="border-color:var(--cyan-border)">
+        <span class="sk-icon">📚</span>
+        <div class="sk-label" style="color:var(--cyan-dark)">LMS &amp; E-Learning</div>
+        <div class="sk-items">
+          <div class="sk-item hot">LearnDash LMS</div>
+          <div class="sk-item hot">Course &amp; Drip Content</div>
+          <div class="sk-item hot">Quizzes &amp; Certificates</div>
+          <div class="sk-item hot">LearnDash + BuddyBoss</div>
+          <div class="sk-item">Moodle Customization</div>
+          <div class="sk-item">Membership Integrations</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <span class="sk-icon">🛒</span>
+        <div class="sk-label">E-Commerce</div>
+        <div class="sk-items">
+          <div class="sk-item">WooCommerce Customization</div>
+          <div class="sk-item">Easy Digital Downloads</div>
+          <div class="sk-item">BuddyBoss &amp; MemberPress</div>
+          <div class="sk-item">WooCommerce Subscriptions</div>
+          <div class="sk-item">Advanced Custom Fields (ACF)</div>
+          <div class="sk-item">WPML Multilingual</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <span class="sk-icon">💻</span>
+        <div class="sk-label">Technical Stack</div>
+        <div class="sk-items">
+          <div class="sk-item">PHP &amp; MySQL</div>
+          <div class="sk-item">HTML5, CSS3, SCSS</div>
+          <div class="sk-item">JavaScript, jQuery, AJAX</div>
+          <div class="sk-item">React.js (Gutenberg)</div>
+          <div class="sk-item">REST API &amp; JSON</div>
+          <div class="sk-item">Git / GitLab</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <span class="sk-icon">🚀</span>
+        <div class="sk-label">Performance &amp; Security</div>
+        <div class="sk-items">
+          <div class="sk-item">Speed &amp; Performance Tuning</div>
+          <div class="sk-item">Caching &amp; CDN Setup</div>
+          <div class="sk-item">Security Best Practices</div>
+          <div class="sk-item">Technical SEO</div>
+          <div class="sk-item">Debugging &amp; Troubleshooting</div>
+          <div class="sk-item">WordPress Coding Standards</div>
+        </div>
+      </div>
+      <div class="sk-card">
+        <span class="sk-icon">🔌</span>
+        <div class="sk-label">Integrations</div>
+        <div class="sk-items">
+          <div class="sk-item">Third-Party API Integrations</div>
+          <div class="sk-item">Payment Gateway Setup</div>
+          <div class="sk-item">CRM Integrations</div>
+          <div class="sk-item">Email Marketing Tools</div>
+          <div class="sk-item">Webhook Automations</div>
+          <div class="sk-item">Custom REST Endpoints</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LearnDash Spotlight -->
+    <div class="lms-box fi" style="margin-top:3.5rem">
+      <div class="lms-top">
+        <div class="lms-ico">🎓</div>
+        <div>
+          <div class="lms-title">LearnDash <em>LMS Specialist</em></div>
+          <p class="lms-sub">Hands-on experience delivering LearnDash implementations at both World Web Technology and Binstellar Technologies — from simple course catalogues to fully membership-gated social learning communities with gamification and progress tracking.</p>
+        </div>
+      </div>
+      <div class="lms-body">
+        <div>
+          <div class="lms-lbl">Core Capabilities</div>
+          <div class="lms-caps">
+            <div class="lms-cap">Course &amp; Lesson Architecture</div>
+            <div class="lms-cap">Topic &amp; Module Structuring</div>
+            <div class="lms-cap">Quiz Builder &amp; Logic</div>
+            <div class="lms-cap">Drip Content Scheduling</div>
+            <div class="lms-cap">Certificate Generation</div>
+            <div class="lms-cap">Progress Tracking</div>
+            <div class="lms-cap">Student Groups &amp; Enrollment</div>
+            <div class="lms-cap">LearnDash REST API</div>
+          </div>
+        </div>
+        <div>
+          <div class="lms-lbl">Ecosystem Integrations</div>
+          <div class="lms-ints">
+            <div class="lms-int"><div class="lms-int-ico">👥</div><div><div class="lms-int-n">BuddyBoss Platform</div><div class="lms-int-d">Social learning communities, activity feeds, course profiles</div></div></div>
+            <div class="lms-int"><div class="lms-int-ico">🛒</div><div><div class="lms-int-n">WooCommerce + Subscriptions</div><div class="lms-int-d">Gated course purchasing, recurring billing, access control</div></div></div>
+            <div class="lms-int"><div class="lms-int-ico">🌍</div><div><div class="lms-int-n">WPML Multilingual</div><div class="lms-int-d">Bilingual course delivery — Italian/English platforms</div></div></div>
+            <div class="lms-int"><div class="lms-int-ico">🔑</div><div><div class="lms-int-n">MemberPress</div><div class="lms-int-d">Membership rules, content restriction &amp; access tiers</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<hr class="rule">
+<div class="sec" id="journey">
+  <div class="sec-hdr fi">
+    <div class="sec-eye">Career Timeline</div>
+    <h2 class="sh">Professional <em>Journey</em></h2>
+    <p class="sec-sub">5+ years of growth, learning, and delivering exceptional WordPress solutions across diverse industries in Ahmedabad and beyond.</p>
+  </div>
+
+  <div class="tl">
+    <div class="tl-row fi">
+      <div class="tl-left"><div class="tl-date">Sep 2025<br>Dec 2025</div></div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="tl-role">Senior WordPress Developer</div>
+          <div class="tl-co">Wildnet Technologies <span class="tl-sep">·</span><span class="tl-loc">Remote</span></div>
+          <p class="tl-desc">Managed comprehensive content operations for WordPress sites including formatting, media optimization, SEO implementation, and executing client updates across pages, blogs, and landing pages.</p>
+          <div class="tl-tags"><span class="ttag">WordPress</span><span class="ttag">SEO</span><span class="ttag">Content Ops</span><span class="ttag">Performance</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row fi">
+      <div class="tl-left"><div class="tl-date">Nov 2024<br>Mar 2025</div></div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="tl-role">Senior WordPress Backend Developer</div>
+          <div class="tl-co">Binstellar Technologies <span class="tl-sep">·</span><span class="tl-loc">Ahmedabad</span></div>
+          <p class="tl-desc">Specialized in third-party API integrations and database optimization. Implemented <strong style="color:var(--cyan-dark)">LearnDash LMS</strong> solutions for e-learning clients — configuring course flows, quiz engines, and certificate automation. Also built custom Moodle plugins to meet specific platform requirements.</p>
+          <div class="tl-tags"><span class="ttag lms">LearnDash LMS</span><span class="ttag lms">E-Learning Solutions</span><span class="ttag edu">Moodle Plugins</span><span class="ttag">API Integrations</span><span class="ttag">DB Optimization</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row fi">
+      <div class="tl-left"><div class="tl-date">Jan 2024<br>Oct 2024</div></div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="tl-role">WordPress Developer</div>
+          <div class="tl-co">World Web Technology <span class="tl-sep">·</span><span class="tl-loc">Ahmedabad</span></div>
+          <p class="tl-desc">Mastered the WordPress ecosystem with deep work in WooCommerce, Gutenberg, ACF, WPML, BuddyBoss, MemberPress, and <strong style="color:var(--cyan-dark)">LearnDash LMS</strong>. Built full-featured LMS platforms integrating LearnDash with BuddyBoss — including the FisioScience Club learning community (club.fisioscience.it).</p>
+          <div class="tl-tags"><span class="ttag lms">LearnDash LMS</span><span class="ttag lms">BuddyBoss</span><span class="ttag lms">FisioScience Club</span><span class="ttag">WooCommerce</span><span class="ttag">WPML</span><span class="ttag">ACF</span><span class="ttag">MemberPress</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row fi">
+      <div class="tl-left"><div class="tl-date">Dec 2022<br>Jan 2024</div></div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="tl-role">WordPress Developer</div>
+          <div class="tl-co">Hyperlink Infosystem <span class="tl-sep">·</span><span class="tl-loc">Ahmedabad</span></div>
+          <p class="tl-desc">Built custom themes and plugins, migrated websites from various platforms to WordPress, and developed APIs for multilingual websites while managing multiple concurrent client projects.</p>
+          <div class="tl-tags"><span class="ttag">Custom Themes</span><span class="ttag">Plugin Dev</span><span class="ttag">Migrations</span><span class="ttag">REST API</span><span class="ttag">Multilingual</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row fi">
+      <div class="tl-left"><div class="tl-date">Dec 2020<br>Nov 2022</div></div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="tl-role">Associate Software Engineer</div>
+          <div class="tl-co">Bytes Technolab <span class="tl-sep">·</span><span class="tl-loc">Ahmedabad</span></div>
+          <p class="tl-desc">Coordinated with project teams, wrote clean code following WordPress coding standards, and specialized in page speed optimization. The foundational period that established strong technical discipline.</p>
+          <div class="tl-tags"><span class="ttag">WordPress</span><span class="ttag">PHP</span><span class="ttag">Speed Optimization</span><span class="ttag">Coding Standards</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row fi">
+      <div class="tl-left"><div class="tl-date">May 2019</div></div>
+      <div class="tl-right">
+        <div class="tl-card" style="border-color:rgba(245,158,11,.2)">
+          <div class="tl-role">Bachelor of Computer Applications</div>
+          <div class="tl-co" style="color:var(--gray)">Gujarat University</div>
+          <p class="tl-desc">Graduated with a strong foundation in computer science, programming, and software development — the launchpad for a career in WordPress development.</p>
+          <div class="tl-tags"><span class="ttag edu">BCA Graduate</span><span class="ttag edu">Gujarat University</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMUNITY -->
+<hr class="rule">
+<section class="bg-soft">
+  <div class="sec" id="community">
+    <div class="sec-hdr fi">
+      <div class="sec-eye">Giving Back</div>
+      <h2 class="sh">Community <em>Involvement</em></h2>
+      <p class="sec-sub">Actively engaged with the WordPress community — attending events, volunteering, sharing knowledge, and contributing to open source.</p>
+    </div>
+
+    <div class="cm-grid">
+
+      <!-- WordCamp 2024 Attendee -->
+      <div class="cm-card fi">
+        <span class="cm-icon">🎤</span>
+        <div class="cm-title">WordCamp Attendee 2024</div>
+        <p class="cm-desc">Attended WordCamp 2024, connecting with developers and designers from across the WordPress ecosystem. Gained insights into the latest trends, plugin development practices, and community-driven standards.</p>
+        <div class="cm-badge">
+          <div class="cm-badge-dot"></div>
+          WordCamp 2024
+        </div>
+      </div>
+
+      <!-- WordCamp 2025 Volunteer -->
+      <div class="cm-card fi" style="border-color:var(--cyan-border)">
+        <span class="cm-icon">🙋</span>
+        <div class="cm-title">WordCamp Ahmedabad Volunteer 2025</div>
+        <p class="cm-desc">Proudly volunteered at WordCamp Ahmedabad 2025 — contributing behind the scenes to help organize and run one of India's biggest WordPress community events. A testament to a deep commitment to giving back to the community.</p>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem">
+          <div class="cm-badge">
+            <div class="cm-badge-dot"></div>
+            WordCamp Ahmedabad 2025
+          </div>
+          <div class="cm-badge" style="background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);color:var(--green)">
+            <div style="width:5px;height:5px;background:var(--green);border-radius:50%"></div>
+            Volunteer
+          </div>
+        </div>
+      </div>
+
+      <!-- Open Source -->
+      <div class="cm-card fi">
+        <span class="cm-icon">🤝</span>
+        <div class="cm-title">Open Source Contributor</div>
+        <p class="cm-desc">Committed to giving back through code contributions, WordPress.org plugin development (Gift Vouchers for WooCommerce), and active participation in developer forums, Slack groups, and local WordPress meetups.</p>
+        <div class="cm-badge" style="background:rgba(15,23,42,.06);border-color:var(--border-mid);color:var(--navy-light)">
+          <div style="width:5px;height:5px;background:var(--navy-light);border-radius:50%"></div>
+          WordPress.org Plugin Author
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="contact-band fi">
+    <div class="cb-inner">
+      <div>
+        <div class="cb-eye">Let's Work Together</div>
+        <h2 class="cb-h">Build Something <em>Great</em></h2>
+        <p class="cb-p">Available for freelance projects and consulting. Whether it's a custom LearnDash LMS platform, a complex WooCommerce store, or a complete WordPress build — let's bring your vision to life.</p>
+        <a href="mailto:madhvikoshti09@gmail.com" class="btn-cyan">Send a Message →</a>
+      </div>
+      <div class="clinks">
+        <a href="mailto:madhvikoshti09@gmail.com" class="clink">
+          <div class="clink-ico">📧</div>
+          <div><div class="clink-lbl">Email</div><div class="clink-val">madhvikoshti09@gmail.com</div></div>
+          <div class="clink-arr">→</div>
+        </a>
+        <a href="https://www.linkedin.com/in/madhvi-desai/" target="_blank" class="clink">
+          <div class="clink-ico">💼</div>
+          <div><div class="clink-lbl">LinkedIn</div><div class="clink-val">linkedin.com/in/madhvi-desai</div></div>
+          <div class="clink-arr">→</div>
+        </a>
+        <a href="https://github.com/Kmadhvi" target="_blank" class="clink">
+          <div class="clink-ico">💻</div>
+          <div><div class="clink-lbl">GitHub</div><div class="clink-val">github.com/Kmadhvi</div></div>
+          <div class="clink-arr">→</div>
+        </a>
+        <a href="https://wordpress.org/plugins/gift-vouchers-for-woocommerce/" target="_blank" class="clink">
+          <div class="clink-ico">🔌</div>
+          <div><div class="clink-lbl">WordPress.org</div><div class="clink-val">Gift Vouchers for WooCommerce</div></div>
+          <div class="clink-arr">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Madhvi Koshti Desai · Senior WordPress Developer · Ahmedabad,Vadodara Gujarat</p>
+  <div class="foot-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#journey">Journey</a>
+    <a href="mailto:madhvikoshti09@gmail.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('on'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const t = document.querySelector(this.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
 </body>
 </html>
